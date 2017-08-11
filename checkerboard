@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for ((i = 0; i < 8; i += 1)); do
+  for ((j = 0; j < 8; j += 1)); do
+    if (((i + j) % 2 == 0)); then
+      printf '*'
+    else
+      printf ' '
+    fi
+  done
+
+  printf '\n'
+done
