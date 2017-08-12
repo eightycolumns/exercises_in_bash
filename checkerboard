@@ -9,9 +9,11 @@ main() {
         printf ' '
       fi
     done
+    unset -v j
 
     printf '\n'
   done
+  unset -v i
 }
 
 is_even() {
