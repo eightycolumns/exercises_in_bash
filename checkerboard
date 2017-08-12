@@ -1,13 +1,22 @@
 #!/bin/bash
 
-for ((i = 0; i < 8; i += 1)); do
-  for ((j = 0; j < 8; j += 1)); do
-    if (((i + j) % 2 == 0)); then
-      printf '*'
-    else
-      printf ' '
-    fi
-  done
+main() {
+  for ((i = 0; i < 8; i += 1)); do
+    for ((j = 0; j < 8; j += 1)); do
+      if is_even $((i + j)); then
+        printf '*'
+      else
+        printf ' '
+      fi
+    done
 
-  printf '\n'
-done
+    printf '\n'
+  done
+}
+
+is_even() {
+  local -ir int=$1
+  return $((int % 2))
+}
+
+[ "${BASH_SOURCE[0]}" == "$0" ] && main "$@"
