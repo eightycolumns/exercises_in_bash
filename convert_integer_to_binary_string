@@ -1,17 +1,26 @@
 #!/bin/bash
 
-for ((i = 0; i < 256; i += 1)); do
-  if ((i == 0)); then
-    binary_string='0'
-  else
-    declare -i temp=${i}
-    binary_string=''
+main() {
+  for ((i = 0; i < 256; i += 1)); do
+    printf "%3d\t%8s\n" ${i} "$(to_binary_string ${i})"
+  done
+}
 
-    while ((temp > 0)); do
-      binary_string="$((temp % 2))${binary_string}"
-      ((temp /= 2))
-    done
+to_binary_string() {
+  local -i int=$1
+
+  if ((int == 0)); then
+    echo '0' && return
   fi
 
-  printf "%3d\t%8s\n" ${i} "${binary_string}"
-done
+  local binary_string=''
+
+  while ((int > 0)); do
+    binary_string="$((int % 2))${binary_string}"
+    ((int /= 2))
+  done
+
+  echo "${binary_string}" && return
+}
+
+[ "${BASH_SOURCE[0]}" == "$0" ] && main "$@"
