@@ -6,7 +6,22 @@ main() {
   done
 }
 
+fail() {
+  local -r message=$1
+  echo "Error: ${message}" 1>&2 && exit 1
+}
+
+is_integer() {
+  if [[ "$1" =~ ^[+-]?(0|[1-9][0-9]*)$ ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 to_binary_string() {
+  is_integer "$1" || fail 'to_binary_string() expects integer'
+
   local -i int=$1
 
   if ((int == 0)); then
