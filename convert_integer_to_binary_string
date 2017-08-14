@@ -4,6 +4,7 @@ main() {
   for ((i = 0; i < 256; i += 1)); do
     printf "%3d\t%8s\n" ${i} "$(to_binary_string ${i})"
   done
+  unset -v i
 }
 
 fail() {
