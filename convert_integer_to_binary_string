@@ -1,0 +1,17 @@
+#!/bin/bash
+
+for ((i = 0; i < 256; i += 1)); do
+  if ((i == 0)); then
+    binary_string='0'
+  else
+    declare -i temp=${i}
+    binary_string=''
+
+    while ((temp > 0)); do
+      binary_string="$((temp % 2))${binary_string}"
+      ((temp /= 2))
+    done
+  fi
+
+  printf "%3d\t%8s\n" ${i} "${binary_string}"
+done
