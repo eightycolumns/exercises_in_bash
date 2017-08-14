@@ -24,6 +24,10 @@ to_binary_string() {
 
   local -i int=$1
 
+  if ((int < 0)); then
+    fail 'to_binary_string() expects nonnegative integer'
+  fi
+
   if ((int == 0)); then
     echo '0' && return
   fi
